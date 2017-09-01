@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html>
-<body>
-
-<table border=1px style="width:100%">
-  <tr>
-    <th>Firstname</th>
-    <th>Lastname</th> 
-    <th>Age</th>
-  </tr>
-  <tr>
-    <td>Jill</td>
-    <td>Smith</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>80</td>
-  </tr>
-</table>
-
+<head>
+    <style>
+        #tbl td {
+            position: relative;
+            background: radial-gradient(yellow, green);
+            border: 1px solid black;
+            height: 75px;
+            width: 75px;
+            text-align: center;
+            font-family: Arial;
+            font-size: larger;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        function CreateBoard() { $("#tbl tbody").empty(); var t, a, e = Math.floor(15 * Math.random() + 1); for (i = 0; i < 4; i++) for ($("#tbl tbody").append("<tr></tr>"), j = 0; j < 4; j++) 0 == i && 0 == j ? $("#tbl tbody tr:last").append('<td id="' + i + j + '" atpos="' + i + j + '" text="16" class="clstd"></td>') : (14 == e && (t = i.toString() + j), 15 == e && (a = i.toString() + j), $("#tbl tbody tr:last").append('<td id="' + i + j + '" atpos="' + i + j + '" text="' + e + '" class="clstd">' + e + "</td>"), (e += 8) > 15 && (e -= 15)); $("#" + t).html(15), $("#" + a).html(14), d1 = Date.now() } function arrowKey(t) { t = t || window.event; var a = $("#00").attr("atpos"); "38" == t.keyCode ? "3" != a.charAt(0) && changeDiraction("down") : "40" == t.keyCode ? "0" != a.charAt(0) && changeDiraction("up") : "37" == t.keyCode ? "3" != a.charAt(1) && changeDiraction("right") : "39" == t.keyCode && "0" != a.charAt(1) && changeDiraction("left") } function changeDiraction(t) { var a, e = $("#00").attr("atpos"); if ("up" == t && (a = getIdToExchange(o = parseInt(e.charAt(0)) - 1 + e.charAt(1)), $("#00").animate({ top: "-=81px" }, 200), $("#" + a).animate({ top: "+=81px" }, 200)), "down" == t && (a = getIdToExchange(o = parseInt(e.charAt(0)) + 1 + e.charAt(1)), $("#00").animate({ top: "+=81px" }, 200), $("#" + a).animate({ top: "-=81px" }, 200)), "left" == t && (a = getIdToExchange(o = e.charAt(0) + (parseInt(e.charAt(1)) - 1)), $("#00").animate({ left: "-=81px" }, 200), $("#" + a).animate({ left: "+=81px" }, 200)), "right" == t) { var o = e.charAt(0) + (parseInt(e.charAt(1)) + 1); a = getIdToExchange(o), $("#00").animate({ left: "+=81px" }, 200), $("#" + a).animate({ left: "-=81px" }, 200) } if ($("#00").attr("atpos", $("#" + a).attr("atpos")), $("#" + a).attr("atpos", e), "33" == $("#00").attr("atpos")) { var r = 1, n = !0; for (i = 0; i < 4; i++) for (j = 0; j < 4; j++) n && ($(".clstd").each(function () { $(this).attr("atpos") == i.toString() + j && $(this).html() != r && (n = !1) }), 15 == r && setTimeout(function () { d2 = Date.now(), alert("Voila , You won !"), $("#lblHighScore").html("Your time : " + Math.floor((d2 - d1) / 1e3) + " seconds !"), $("#btnRestart").show() }, 500), r++) } } function getIdToExchange(t) { var a; return $(".clstd").each(function () { $(this).attr("atpos") == t && (a = $(this).attr("id")) }), a } $(document).ready(function () { CreateBoard(), $("#btnRestart").click(function () { CreateBoard(), $("#btnRestart").hide() }) }); var d1, d2; document.onkeydown = arrowKey;
+    </script>
+</head>
+<body style="background-color:#b5b7ae;overflow:hidden;">
+    <div style="margin:300px !important;margin-top:50px !important;border:3px solid black;background-color:#dde0d5;"> <div style="margin:10% !important;"> <h2><u>Slide</u> <u>to</u> <u>Win</u> !</h2> <table id="tbl" style="margin:0px !important;margin-top:15px !important;"> <tbody> <!--<tr><td><div id="div1" style="background:#ffff61;border:1px solid black; height:100px;width:100px;position:absolute;"></div></td></tr>--> </tbody> </table> <h4 id="lblHighScore"></h4> <input type="button" value="Restart" id="btnRestart" style="display:none" /> </div> </div>
 </body>
 </html>
